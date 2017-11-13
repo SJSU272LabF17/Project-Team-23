@@ -2,7 +2,7 @@
 Demographics for the disabled people as per Race/Ethnicity, Gender, Age and Disability Status.
 
 
-Team Member
+Team Member:
 Amey Navale
 Astha Kumar
 Suhas Hunsimar
