@@ -14,3 +14,5 @@ Navigate to the project folder in CLI and execute the following commands:
 npm install
 npm start
 ```
+Navigate to the following URL on your browser:
+localhost:3000
