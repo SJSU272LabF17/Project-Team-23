@@ -86,9 +86,37 @@ app.get('/', function(req,res){
 
 
 app.get('/login', function(req,res){
+/*
+ var spawn = require('child_process').spawn,
     py    = spawn('python', ['ml_model_evaluate.py']),
+    data = [1,3],
+    dataString = '';
 
+py.stdout.on('data', function(data){
+  dataString += data.toString();
+});
+py.stdout.on('end', function(){
+  console.log('Sum of numbers=',dataString);
+});
+py.stdin.write(JSON.stringify(data));
+py.stdin.end();
+
+*/
         ejs.renderFile("./views/login.ejs",function (err, result) {
+                if (!err) {
+                    res.end(result);
+                }
+                else{
+                    res.end('An error occurred');
+                    console.log(err);
+                }
+            }
+        )
+});
+
+app.get('/salary', function(req,res){
+
+        ejs.renderFile("./views/salary.ejs",function (err, result) {
                 if (!err) {
                     res.end(result);
                 }
