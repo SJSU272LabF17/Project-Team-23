@@ -129,6 +129,148 @@ app.get('/salary', function(req,res){
 });
 
 
+//Plot gender total
+app.get('/gender',function(req,res){
+
+    var options = {
+        hostname: 'api.bls.gov',
+        path: 'https://api.bls.gov/publicAPI/v2/timeseries/data',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    var str='';
+
+    var postData = {
+        'seriesid':["LNU02075630","LNU02075704"],
+        "startyear":"2015",
+        "endyear":"2016",
+        "registrationkey":BLSkey
+    }
+
+    const req1 = https.request(options, function(response) {
+        console.log("STATUS: ${res.statusCode}");
+    console.log("HEADERS: ${JSON.stringify(res.headers)}");
+    response.setEncoding('utf8');
+
+        response.on('data', function (chunk) {
+            //console.log(chunk);
+            str += chunk;
+        });
+        //var results = JSON.stringify(str);
+        //console.log(results.Results.series[0].seriesID);
+
+
+        //console.log(JSON.parse(JSON.stringify(str)));
+        response.on('end', function () {
+            //console.log(JSON.parse(JSON.stringify(str)));
+            var results = JSON.parse(str);
+            console.log(results.Results.series[0].seriesID);
+            var results1 = results.Results.series;
+            ejs.renderFile("./views/gender.ejs",{ data:results1 },function (err, result) {
+                    if (!err) {
+                        res.end(result);
+                    }
+                    else{
+                        res.end('An error occurred');
+                        console.log(err);
+                    }
+                }
+            )
+            //console.log(str);
+        });
+});
+
+    req1.on('error', function(e) {
+        console.error("problem with request: ${e.message}");
+});
+
+// write data to request body
+    var postData = {
+        "seriesid":["LNU02075630","LNU02075704"],
+        "startyear":"2016",
+        "endyear":"2016",
+        "registrationkey":"e22450788c9042bea997421370772602"
+    }
+    req1.write(JSON.stringify(postData));
+    req1.end();
+      console.log(str);
+
+});
+
+app.get('/education',function(req,res){
+
+    var options = {
+        hostname: 'api.bls.gov',
+        path: 'https://api.bls.gov/publicAPI/v2/timeseries/data',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    var str='';
+
+    var postData = {
+        'seriesid':["LNU00078209", "LNU00078207", "LNU00078208", "LNU00078210"],
+        "startyear":"2015",
+        "endyear":"2016",
+        "registrationkey":BLSkey
+    }
+
+    const req1 = https.request(options, function(response) {
+        console.log("STATUS: ${res.statusCode}");
+    console.log("HEADERS: ${JSON.stringify(res.headers)}");
+    response.setEncoding('utf8');
+
+        response.on('data', function (chunk) {
+            //console.log(chunk);
+            str += chunk;
+        });
+        //var results = JSON.stringify(str);
+        //console.log(results.Results.series[0].seriesID);
+
+
+        //console.log(JSON.parse(JSON.stringify(str)));
+        response.on('end', function () {
+            //console.log(JSON.parse(JSON.stringify(str)));
+            var results = JSON.parse(str);
+            console.log(results.Results.series[0].seriesID);
+            var results1 = results.Results.series;
+            ejs.renderFile("./views/education.ejs",{ data:results1 },function (err, result) {
+                    if (!err) {
+                        res.end(result);
+                    }
+                    else{
+                        res.end('An error occurred');
+                        console.log(err);
+                    }
+                }
+            )
+            //console.log(str);
+        });
+});
+
+    req1.on('error', function(e) {
+        console.error("problem with request: ${e.message}");
+});
+
+// write data to request body
+    var postData = {
+        "seriesid":["LNU00078209", "LNU00078207", "LNU00078208", "LNU00078210"],
+        "startyear":"2016",
+        "endyear":"2016",
+        "registrationkey":"e22450788c9042bea997421370772602"
+    }
+    req1.write(JSON.stringify(postData));
+    req1.end();
+      console.log(str);
+
+});
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
