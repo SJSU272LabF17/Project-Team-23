@@ -86,6 +86,7 @@ app.get('/', function(req,res){
 
 
 app.get('/login', function(req,res){
+    py    = spawn('python', ['ml_model_evaluate.py']),
 
         ejs.renderFile("./views/login.ejs",function (err, result) {
                 if (!err) {
