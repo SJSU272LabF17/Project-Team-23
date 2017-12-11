@@ -5,6 +5,8 @@ var http = require('http');
 var https = require('https');
 var path = require('path');
 var ejs = require('ejs');
+var bodyParser = require('body-parser');
+
 var app = express();
 
 // BLS Key. Necessary for communicating with V2 Version API.
@@ -20,7 +22,8 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 // Initial Landing page when the server runs. Sidebar - HOME - Population - With a disability. ReferPage: welcome.ejs
 app.get('/', function(req,res){
@@ -170,10 +173,53 @@ function renderPage(res, graphResult, pageName) {
     )
 }
 
+app.get('/job', function(req, res) {
+
+    ejs.renderFile("./views/jobprediction.ejs", function(err, result) {
+        if (!err) {
+            res.end(result);
+        } else {
+            res.end('An error occurred');
+            console.log(err);
+        }
+    })
+}).post('/job', function(req, res) {
+
+        console.log(req.body.profession);
+        console.log(req.body.gender);
+
+    var spawn = require('child_process').spawn,
+        py    = spawn('py', ['ml_model_evaluate.py']),
+        data = [req.body.profession,req.body.gender],
+        dataString = '';
+
+    py.stdout.on('data', function(data){
+        dataString += data.toString();
+    });
+    py.stdout.on('end', function(){
+        console.log('Sum of numbers=',dataString);
+    });
+    py.stdin.write(JSON.stringify(data));
+    py.stdin.end();
+
+    var d = 1.23345;
+    var d1 = JSON.parse("{d:"+d+"}");
+    console.log(d1);
+
+    ejs.renderFile("./views/jobprediction.ejs", {data:d1} ,function(err, result) {
+        if (!err) {
+            res.end(result);
+        } else {
+            res.end('An error occurred');
+            console.log(err);
+        }
+    })
+});
+
 app.get('/login', function(req,res){
-    /*
-     var spawn = require('child_process').spawn,
-        py    = spawn('python', ['ml_model_evaluate.py']),
+
+     /*var spawn = require('child_process').spawn,
+        py    = spawn('py', ['ml_model_evaluate.py']),
         data = [1,3],
         dataString = '';
 
@@ -184,10 +230,10 @@ app.get('/login', function(req,res){
       console.log('Sum of numbers=',dataString);
     });
     py.stdin.write(JSON.stringify(data));
-    py.stdin.end();
+    py.stdin.end();*/
 
 
-    */
+
     ejs.renderFile("./views/login.ejs",function (err, result) {
             if (!err) {
                 res.end(result);
