@@ -6,6 +6,7 @@ var https = require('https');
 var path = require('path');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
+
 var app = express();
 
 // BLS Key. Necessary for communicating with V2 Version API.
@@ -204,12 +205,15 @@ app.get('/job', function(req, res) {
 
 }).post('/job', function(req, res) {
 
+
     console.log(req.body.profession);
     console.log(req.body.gender);
+
 
     var spawn = require('child_process').spawn,
         py    = spawn('py', ['ml_model_evaluate.py']),
         data = [req.body.gender,req.body.profession],
+
         dataString = '';
 
     py.stdout.on('data', function(data){
@@ -232,6 +236,8 @@ app.get('/job', function(req, res) {
 
 });
 
+
+
 app.get('/login', function(req,res){
 
     /*var spawn = require('child_process').spawn,
@@ -246,6 +252,7 @@ app.get('/login', function(req,res){
    });
    py.stdin.write(JSON.stringify(data));
    py.stdin.end();*/
+
 
 
 
