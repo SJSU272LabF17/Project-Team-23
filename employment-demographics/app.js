@@ -106,18 +106,7 @@ app.get('/salary', function(req,res){
     )
 });
 
-// Sidebar - JOB. ReferPage: jobprediction.ejs
-app.get('/job', function(req, res) {
 
-    ejs.renderFile("./views/jobprediction.ejs", function(err, result) {
-        if (!err) {
-            res.end(result);
-        } else {
-            res.end('An error occurred');
-            console.log(err);
-        }
-    })
-});
 
 // Express Server port listener.
 http.createServer(app).listen(app.get('port'), function(){
