@@ -175,22 +175,10 @@ function renderPage(res, graphResult, pageName) {
 
 app.get('/job', function(req, res) {
 
-    ejs.renderFile("./views/jobprediction.ejs", function(err, result) {
-        if (!err) {
-            res.end(result);
-        } else {
-            res.end('An error occurred');
-            console.log(err);
-        }
-    })
-}).post('/job', function(req, res) {
-
-        console.log(req.body.profession);
-        console.log(req.body.gender);
 
     var spawn = require('child_process').spawn,
         py    = spawn('py', ['ml_model_evaluate.py']),
-        data = [req.body.profession,req.body.gender],
+        data = [0,1],
         dataString = '';
 
     py.stdout.on('data', function(data){
@@ -198,22 +186,46 @@ app.get('/job', function(req, res) {
     });
     py.stdout.on('end', function(){
         console.log('Sum of numbers=',dataString);
+        ejs.renderFile("./views/jobprediction.ejs",{data:dataString} ,function(err, result) {
+            if (!err) {
+                res.end(result);
+            } else {
+                res.end('An error occurred');
+                console.log(err);
+            }
+        })
     });
     py.stdin.write(JSON.stringify(data));
     py.stdin.end();
 
-    var d = 1.23345;
-    var d1 = JSON.parse("{d:"+d+"}");
-    console.log(d1);
+}).post('/job', function(req, res) {
 
-    ejs.renderFile("./views/jobprediction.ejs", {data:d1} ,function(err, result) {
-        if (!err) {
-            res.end(result);
-        } else {
-            res.end('An error occurred');
-            console.log(err);
-        }
-    })
+        console.log(req.body.profession);
+        console.log(req.body.gender);
+
+    var spawn = require('child_process').spawn,
+        py    = spawn('py', ['ml_model_evaluate.py']),
+        data = [req.body.gender,req.body.profession],
+        dataString = '';
+
+    py.stdout.on('data', function(data){
+        dataString += data.toString();
+    });
+    py.stdout.on('end', function(){
+        console.log('Sum of numbers=',dataString);
+        ejs.renderFile("./views/jobprediction.ejs",{data:dataString} ,function(err, result) {
+            if (!err) {
+                res.end(result);
+            } else {
+                res.end('An error occurred');
+                console.log(err);
+            }
+        })
+    });
+    py.stdin.write(JSON.stringify(data));
+    py.stdin.end();
+    console.log(dataString);
+
 });
 
 app.get('/login', function(req,res){
