@@ -14,11 +14,13 @@ var BLSkey="e22450788c9042bea997421370772602";
 var hostname = "api.bls.gov";
 var multiSeriesPath = "https://api.bls.gov/publicAPI/v2/timeseries/data";
 
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Initial Landing page when the server runs. Sidebar - HOME - Population - With a disability. ReferPage: welcome.ejs
 app.get('/', function(req,res){
@@ -32,7 +34,7 @@ app.get('/', function(req,res){
             'Content-Type': 'application/json'
         }
     };
-
+  
     // Population - With a disability. Gender (0-1), Ethnicity (2-5), Age (6-12).
     var populationData = {
         'seriesid':["LNU01075630", "LNU01075704", "LNU00075557", "LNU00075558", "LNU00075560", "LNU00075559", "LNU00074600", "LNU00075570", "LNU00075580", "LNU00075585", "LNU00075590", "LNU00075595", "LNU00075600"],
@@ -56,7 +58,6 @@ app.get('/employment',function(req,res){
             'Content-Type': 'application/json'
         }
     };
-
     // Education - With a disability. Pie Chart (0-3), Side-by-side Bar Chart (4-11).
     var educationData = {
         'seriesid':["LNU00078210", "LNU00078208", "LNU00078209", "LNU00078207", "LNU02078210", "LNU02078208", "LNU02078209", "LNU02078207", "LNU03078210", "LNU03078208", "LNU03078209", "LNU03078207"],
@@ -81,6 +82,7 @@ app.get('/education',function(req,res){
             'Content-Type': 'application/json'
         }
     };
+
 
     // Education - With a disability. Pie Chart (0-3), Side-by-side Bar Chart (4-11).
     var educationData = {
@@ -132,6 +134,7 @@ function httpRESTRequest(headers, apiBodyData, res, pageName) {
             jsonResponse += chunk;
         });
 
+
         response.on('end', function () {
             var results = JSON.parse(jsonResponse);
             console.log(results.Results.series[0].seriesID);
@@ -147,6 +150,7 @@ function httpRESTRequest(headers, apiBodyData, res, pageName) {
     httpRequest.on('error', function (e) {
         console.error("problem with request: ${e.message}");
     });
+
     httpRequest.end(); // Closes the HTTP Request connection.
 }
 
@@ -182,6 +186,7 @@ app.get('/login', function(req,res){
     py.stdin.write(JSON.stringify(data));
     py.stdin.end();
 
+
     */
     ejs.renderFile("./views/login.ejs",function (err, result) {
             if (!err) {
@@ -193,4 +198,5 @@ app.get('/login', function(req,res){
             }
         }
     )
+
 });
