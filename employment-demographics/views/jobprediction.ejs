@@ -795,9 +795,9 @@
                                 <div>
                                     <form class="form-horizontal" role="form" method="POST" action="job">
                                         <label for="jobtype">Job Type:</label>
-                                        <select name="profession" id="jobtype" class="form-control" onchange="changeColor()">
+                                        <select name="profession" id="jobtype" class="form-control" onchange="job_val()">
                                             <option value="">Choose..</option>
-                                            <option value="1" selected="Management professional and related occupations">Management professional and related occupations</option>
+                                            <option value="1">Management professional and related occupations</option>
                                             <option value="2">Business and financial operations occupations</option>
                                             <option value="3">Architecture and engineering occupations</option>
                                             <option value="4">Legal occupations</option>
@@ -830,14 +830,41 @@
                                         <label>Gender *:</label>
                                         <p>
                                             M:
-                                            <input type="radio" class="flat" name="gender" id="genderM" value="0" checked="" required /> F:
-                                            <input type="radio" class="flat" name="gender" id="genderF" value="1" />
+                                            <input type="radio" class="flat" name="gender" id="genderM" value="0" onchange="job_val()" checked="" required /> F:
+                                            <input type="radio" class="flat" name="gender" id="genderF" value="1" onchange="job_val()"/>
                                         </p>
-                                        <button type="submit" class="btn btn-default btn-sm">Get Prediction</button>
+                                       
 
                                         <div class="form-group">
                                             <label for="ex3">Predicted Job % </label>
-                                            <input type="text" id="ex3" class="form-control" placeholder="<%=data%>">
+                                              <script src='js/require.js'></script>
+                                              <script type="text/javascript">
+                                            function job_val() {
+
+                                        
+                                                var profession = document.getElementById("jobtype").value;
+                                                var gender = 0;
+                                                if(document.getElementById("genderF").checked) {
+                                                    gender = 1;
+                                                }
+                                        
+                                            var coefficients = [ -0.21035503, 0.21035503 ,24.38244048,  -3.74255952 ,-5.90922619, -6.23422619,  12.95744048  ,-1.57589286 ,-2.75089286,   3.60744048, -1.92589286 , -5.32589286  ,-5.43422619,  -0.14255952   ,1.27410714, -3.89255952 ,-3.40089286 ,-5.43422619  -5.42589286 , -4.34255952, -0.05922619, 10.91577381 , 2.61577381 ,2.61577381 ,-1.87589286, 6.17410714 , -6.55922619  ,6.87410714 , -5.36755952 ,-2.01755952 , 0.000000 ];
+                                            var intercept = 7.3175595238095212;
+
+                                            var gender_vec = new Array(2).fill(0);;
+                                            gender_vec[gender] = 1;   
+                                            var profession_vec = new Array(28).fill(0);
+                                            profession_vec[profession-1] = 1;  
+                                            var feature_vector = gender_vec.concat(profession_vec);
+                                            var score = intercept;
+                                            for(var i = 0; i < feature_vector.length; i++) {
+                                            score += feature_vector[i] * coefficients[i];
+                                            }   
+                                            var n = score.toFixed(2);
+                                        document.getElementById("ex3").value = n;
+                                }
+                                    </script>
+                                            <input type="text" id="ex3" class="form-control">
                                         </div>
                                     </form>
                                 </div>
