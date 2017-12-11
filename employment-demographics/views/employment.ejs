@@ -32,9 +32,6 @@
   <link href="../build/css/custom.min.css" rel="stylesheet">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
-  <script src="http://code.highcharts.com/highcharts.js"></script>
-  <script src="http://code.highcharts.com/highcharts-more.js"></script>
-  <script src="http://code.highcharts.com/modules/exporting.js"></script>
 </head>
 
 <body class="nav-md">
@@ -43,7 +40,7 @@
     <div class="col-md-3 left_col">
       <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-          <a href="index.html" class="site_title"> <span>Demographics</span></a>
+          <a href="/" class="site_title"><i class="fa fa-line-chart"></i> <span>Employment Demographics!</span></a>
         </div>
         <div class="clearfix"></div>
         <br />
@@ -62,7 +59,7 @@
               </li>
               <li><a href="/salary"><i class="fa fa-bar-chart-o"></i> Jobs & Salary </a>
               </li>
-              <li><a href="/job"><i class="fa fa-home"></i> Job Predictions</a>
+              <li><a href="/job"><i class="fa fa-magic"></i> Job Predictions</a>
               </li>
             </ul>
           </div>
@@ -106,29 +103,399 @@
               </div>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <div id="chart_plot_01" class="demo-placeholder"></div>
-              <script>
-                  (function(){ function include(script, next) {var sc=document.createElement("script");sc.src = script;sc.type="text/javascript";sc.onload=function() {if (++next < incl.length) include(incl[next], next);};document.head.appendChild(sc);}function each(a, fn){if (typeof a.forEach !== "undefined"){a.forEach(fn);}else{for (var i = 0; i < a.length; i++){if (fn) {fn(a[i]);}}}}var inc = {},incl=[]; each(document.querySelectorAll("script"), function(t) {inc[t.src.substr(0, t.src.indexOf("?"))] = 1;});each(Object.keys({"https://code.highcharts.com/stock/highstock.js":1,"https://code.highcharts.com/adapters/standalone-framework.js":1,"https://code.highcharts.com/highcharts-more.js":1,"https://code.highcharts.com/highcharts-3d.js":1,"https://code.highcharts.com/modules/data.js":1,"https://code.highcharts.com/modules/map.js":1,"https://code.highcharts.com/modules/exporting.js":1,"http://code.highcharts.com/modules/funnel.js":1,"http://code.highcharts.com/modules/solid-gauge.js":1}),function (k){if (!inc[k]) {incl.push(k)}});if (incl.length > 0) { include(incl[0], 0); } function cl() {if(typeof window["Highcharts"] !== "undefined"){var options={"options":{},"title":{"text":"Employment Rate for Workers with Disabilities by State"},"subtitle":{"text":"Source : 2016 Annual Disability Statistics Compendium"},"exporting":{},"yAxis":[{"title":{}}],"series":[{"data":[["Wyoming",57.1],["South Dakota",51.7],["North Dakota",48.8],["Nebraska",48.6],["Minnesota",47.5],["Iowa",46.3],["Utah",45.8],["Kansas",42.8],["Alaska",42.4],["Wisconsin",41.2],["Nevada",41.1],["Vermont",41],["Colorado",40.8],["Montana",40.3],["Idaho",40.2],["Maryland",40],["New Hampshire",39.5],["Texas",38.6],["Illinois",38.3],["New Jersey",37.9],["Oregon",37.8],["Virginia",37.4],["Washington",36.8],["Rhode Island",35.8],["Pennsylvania",35.7],["Connecticut",35.4],["Missouri",35.3],["Ohio",35.2],["Massachusetts",35.1],["Indiana",34.9],["Oklahoma",34.8],["Arizona",34.2],["Delaware",33.9],["California",33.8],["Louisiana",33],["New York",33],["North Carolina",32.2],["Hawaii",31.6],["Florida",31.4],["Georgia",31.1],["Michigan",30.9],["New Mexico",30.8],["Arkansas",30.7],["Tennessee",30.4],["Maine",29.6],["South Carolina",28.7],["Alabama",27.9],["Mississippi",27.5],["Kentucky",27.4],["West Virginia",25.4]],"name":"Employment Rate","_colorIndex":0,"_symbolIndex":0}],"plotOptions":{"series":{"animation":false}}};
-                      // Sample of extending options:
-                      Highcharts.merge(true, options, {
-                          chart: {
-                          },
-                          plotOptions: {
-                              series: {
-                                  cursor: "pointer",
-                                  events: {
-                                      click: function(event) {
-                                          alert(this.name + " clicked\n" +
-                                              "Alt: " + event.altKey + "\n" +
-                                              "Control: " + event.ctrlKey + "\n" +
-                                              "Shift: " + event.shiftKey + "\n");
-                                      }
-                                  }
-                              }
-                          }
-                      });
-                      new Highcharts.Chart("chart_plot_01", options);}else window.setTimeout(cl, 20);}cl();})();
-              </script>
+              <div id="hs-component">
+                <div class="container">
+                  <div id="wrap" class="sidebar-wrapper">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+                      <div class="chart-container">
+                        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+                        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+                        <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+                        <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+                        <script src="https://code.highcharts.com/mapdata/countries/us/custom/us-small.js"></script>
+                        <div id="container"></div>
+                        <div id="table-div" style="display:none">
+                          <table id="data">
+                            <tr>
+                              <td>1</td>
+                              <td>NEBRASKA</td>
+                              <td>48.6</td>
+                            </tr>
+                            <tr>
+                              <td>2</td>
+                              <td>NORTH DAKOTA</td>
+                              <td>48.8</td>
+                            </tr>
+                            <tr>
+                              <td>3</td>
+                              <td>UTAH</td>
+                              <td>42.8</td>
+                            </tr>
+                            <tr>
+                              <td>4</td>
+                              <td>VERMONT</td>
+                              <td>41</td>
+                            </tr>
+                            <tr>
+                              <td>5</td>
+                              <td>IOWA</td>
+                              <td>46.3</td>
+                            </tr>
+                            <tr>
+                              <td>5</td>
+                              <td>MINNESOTA</td>
+                              <td>47.5</td>
+                            </tr>
+                            <tr>
+                              <td>5</td>
+                              <td>NEW HAMPSHIRE</td>
+                              <td>39.5</td>
+                            </tr>
+                            <tr>
+                              <td>5</td>
+                              <td>SOUTH DAKOTA</td>
+                              <td>51.7</td>
+                            </tr>
+                            <tr>
+                              <td>9</td>
+                              <td>IDAHO</td>
+                              <td>40.2</td>
+                            </tr>
+                            <tr>
+                              <td>9</td>
+                              <td>MONTANA</td>
+                              <td>40.3</td>
+                            </tr>
+                            <tr>
+                              <td>11</td>
+                              <td>HAWAII</td>
+                              <td>31.6</td>
+                            </tr>
+                            <tr>
+                              <td>11</td>
+                              <td>WYOMING</td>
+                              <td>57.1</td>
+                            </tr>
+                            <tr>
+                              <td>13</td>
+                              <td>COLORADO</td>
+                              <td>40.8</td>
+                            </tr>
+                            <tr>
+                              <td>13</td>
+                              <td>OKLAHOMA</td>
+                              <td>34.8</td>
+                            </tr>
+                            <tr>
+                              <td>13</td>
+                              <td>TEXAS</td>
+                              <td>38.6</td>
+                            </tr>
+                            <tr>
+                              <td>16</td>
+                              <td>KANSAS</td>
+                              <td>42.8</td>
+                            </tr>
+                            <tr>
+                              <td>17</td>
+                              <td>DELAWARE</td>
+                              <td>33.9</td>
+                            </tr>
+                            <tr>
+                              <td>17</td>
+                              <td>MASSACHUSETTS</td>
+                              <td>35.1</td>
+                            </tr>
+                            <tr>
+                              <td>17</td>
+                              <td>WISCONSIN</td>
+                              <td>41.2</td>
+                            </tr>
+                            <tr>
+                              <td>20</td>
+                              <td>MAINE</td>
+                              <td>29.6</td>
+                            </tr>
+                            <tr>
+                              <td>21</td>
+                              <td>VIRGINIA</td>
+                              <td>37.4</td>
+                            </tr>
+                            <tr>
+                              <td>22</td>
+                              <td>INDIANA</td>
+                              <td>34.9</td>
+                            </tr>
+                            <tr>
+                              <td>22</td>
+                              <td>KENTUCKY</td>
+                              <td>27.4</td>
+                            </tr>
+                            <tr>
+                              <td>24</td>
+                              <td>OHIO</td>
+                              <td>35.2</td>
+                            </tr>
+                            <tr>
+                              <td>25</td>
+                              <td>MARYLAND</td>
+                              <td>40</td>
+                            </tr>
+                            <tr>
+                              <td>25</td>
+                              <td>OREGON</td>
+                              <td>37.8</td>
+                            </tr>
+                            <tr>
+                              <td>27</td>
+                              <td>PENNSYLVANIA</td>
+                              <td>35.7</td>
+                            </tr>
+                            <tr>
+                              <td>27</td>
+                              <td>WASHINGTON</td>
+                              <td>36.8</td>
+                            </tr>
+                            <tr>
+                              <td>29</td>
+                              <td>MICHIGAN</td>
+                              <td>30.9</td>
+                            </tr>
+                            <tr>
+                              <td>30</td>
+                              <td>ARKANSAS</td>
+                              <td>30.7</td>
+                            </tr>
+                            <tr>
+                              <td>30</td>
+                              <td>FLORIDA</td>
+                              <td>31.4</td>
+                            </tr>
+                            <tr>
+                              <td>30</td>
+                              <td>NEW YORK</td>
+                              <td>33</td>
+                            </tr>
+                            <tr>
+                              <td>30</td>
+                              <td>NORTH CAROLINA</td>
+                              <td>32.2</td>
+                            </tr>
+                            <tr>
+                              <td>34</td>
+                              <td>ARIZONA</td>
+                              <td>34.2</td>
+                            </tr>
+                            <tr>
+                              <td>34</td>
+                              <td>MISSOURI</td>
+                              <td>35.3</td>
+                            </tr>
+                            <tr>
+                              <td>34</td>
+                              <td>TENNESSEE</td>
+                              <td>30.4</td>
+                            </tr>
+                            <tr>
+                              <td>37</td>
+                              <td>RHODE ISLAND</td>
+                              <td>35.8</td>
+                            </tr>
+                            <tr>
+                              <td>38</td>
+                              <td>CONNECTICUT</td>
+                              <td>35.4</td>
+                            </tr>
+                            <tr>
+                              <td>38</td>
+                              <td>ILLINOIS</td>
+                              <td>38.3</td>
+                            </tr>
+                            <tr>
+                              <td>40</td>
+                              <td>ALABAMA</td>
+                              <td>27.9</td>
+                            </tr>
+                            <tr>
+                              <td>41</td>
+                              <td>NEW MEXICO</td>
+                              <td>30.8</td>
+                            </tr>
+                            <tr>
+                              <td>42</td>
+                              <td>GEORGIA</td>
+                              <td>31.1</td>
+                            </tr>
+                            <tr>
+                              <td>43</td>
+                              <td>CALIFORNIA</td>
+                              <td>33.8</td>
+                            </tr>
+                            <tr>
+                              <td>44</td>
+                              <td>NEW JERSEY</td>
+                              <td>37.9</td>
+                            </tr>
+                            <tr>
+                              <td>45</td>
+                              <td>LOUISIANA</td>
+                              <td>33</td>
+                            </tr>
+                            <tr>
+                              <td>46</td>
+                              <td>MISSISSIPPI</td>
+                              <td>27.5</td>
+                            </tr>
+                            <tr>
+                              <td>47</td>
+                              <td>ALASKA</td>
+                              <td>42.4</td>
+                            </tr>
+                            <tr>
+                              <td>47</td>
+                              <td>SOUTH CAROLINA</td>
+                              <td>28.7</td>
+                            </tr>
+                            <tr>
+                              <td>49</td>
+                              <td>NEVADA</td>
+                              <td>41.1</td>
+                            </tr>
+                            <tr>
+                              <td>50</td>
+                              <td>WEST VIRGINIA</td>
+                              <td>25.4</td>
+                            </tr>
+                            <tr>
+                              <td>51</td>
+                              <td>DISTRICT OF COLUMBIA</td>
+                              <td>25.4</td>
+                            </tr>
+                          </table>
+                        </div>
+                        <script>
+                            jQuery.noConflict();
+                            var example = 'us-data-labels',
+                                theme = 'default';
+                            (function($) { // encapsulate jQuery
+
+
+                                // Load the data from the HTML table and tag it with an upper case name used for joining
+                                var data = [],
+                                    // Get the map data
+                                    mapData = Highcharts.geojson(Highcharts.maps['countries/us/custom/us-small']);
+
+                                Highcharts.data({
+                                    table: document.getElementById('data'),
+                                    startColumn: 1,
+                                    startRow: 1,
+                                    complete: function(options) {
+                                        $.each(options.series[0].data, function() {
+                                            data.push({
+                                                ucName: this[0],
+                                                value: this[1]
+                                            });
+                                        });
+                                    }
+                                });
+
+                                // Process mapdata
+                                $.each(mapData, function() {
+                                    var path = this.path,
+                                        copy = {
+                                            path: path
+                                        };
+
+                                    // This point has a square legend to the right
+                                    if (path[1] === 9727) {
+
+                                        // Identify the box
+                                        Highcharts.seriesTypes.map.prototype.getBox.call({}, [copy]);
+
+                                        // Place the center of the data label in the center of the point legend box
+                                        this.middleX = ((path[1] + path[4]) / 2 - copy._minX) / (copy._maxX - copy._minX); // eslint-disable-line no-underscore-dangle
+                                        this.middleY = ((path[2] + path[7]) / 2 - copy._minY) / (copy._maxY - copy._minY); // eslint-disable-line no-underscore-dangle
+
+                                    }
+                                    // Tag it for joining
+                                    this.ucName = this.name.toUpperCase();
+                                });
+
+
+
+
+                                // Initiate the chart
+                                Highcharts.mapChart('container', {
+
+                                    title: {
+                                        text: 'Employment Rate for Workers with Disabilities by State'
+                                    },
+                                    subtitle:{
+                                        text :'Reference :- http://fortune.com/2017/02/28/disability-employment-rank/'
+                                    },
+                                    mapNavigation: {
+                                        enabled: true,
+                                        enableButtons: false
+                                    },
+
+                                    xAxis: {
+                                        labels: {
+                                            enabled: false
+                                        }
+                                    },
+
+                                    colorAxis: {
+                                        labels: {
+                                            format: '{value}%'
+                                        }
+                                    },
+
+                                    series: [{
+                                        animation: {duration: 1000},
+                                        mapData: mapData,
+                                        data: data,
+                                        joinBy: 'ucName',
+                                        name: 'Employment Rate',
+                                        states: {
+                                            hover: {
+                                                color: '#a4edba'
+                                            }
+                                        },
+                                        dataLabels: {
+                                            enabled: true,
+                                            formatter: function() {
+                                                return this.point.properties['hc-a2'];
+                                            },
+                                            style: {
+                                                fontSize: '10px'
+                                            }
+                                        },
+                                        tooltip: {
+                                            valueSuffix: '%'
+                                        }
+                                    }, {
+                                        type: 'mapline',
+                                        data: Highcharts.geojson(Highcharts.maps['countries/us/custom/us-small'], 'mapline'),
+                                        color: 'silver'
+                                    }]
+                                });
+                            })(jQuery);
+                        </script>
+                      </div>
+
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 sidebar-eq-fill"></div>
+                    <div class="clearfix"></div>
+                  </div>
+
+                </div>
+              </div>
+              <div>
+
+              </div>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -157,6 +524,9 @@
                     </div>
                   </div>
                   <div class="col-md-12 col-sm-12 col-xs-12">
+                    <script src="http://code.highcharts.com/highcharts.js"></script>
+                    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+                    <script src="http://code.highcharts.com/modules/exporting.js"></script>
                     <div id="chart_plot_02" class="demo-placeholder"></div>
                     <script>
                         (function(){ function include(script, next) {var sc=document.createElement("script");sc.src = script;sc.type="text/javascript";sc.onload=function() {if (++next < incl.length) include(incl[next], next);};document.head.appendChild(sc);}function each(a, fn){if (typeof a.forEach !== "undefined"){a.forEach(fn);}else{for (var i = 0; i < a.length; i++){if (fn) {fn(a[i]);}}}}var inc = {},incl=[]; each(document.querySelectorAll("script"), function(t) {inc[t.src.substr(0, t.src.indexOf("?"))] = 1;});each(Object.keys({"https://code.highcharts.com/stock/highstock.js":1,"https://code.highcharts.com/adapters/standalone-framework.js":1,"https://code.highcharts.com/highcharts-more.js":1,"https://code.highcharts.com/highcharts-3d.js":1,"https://code.highcharts.com/modules/data.js":1,"https://code.highcharts.com/modules/map.js":1,"https://code.highcharts.com/modules/exporting.js":1,"http://code.highcharts.com/modules/funnel.js":1,"http://code.highcharts.com/modules/solid-gauge.js":1}),function (k){if (!inc[k]) {incl.push(k)}});if (incl.length > 0) { include(incl[0], 0); } function cl() {if(typeof window["Highcharts"] !== "undefined"){var options={"options":{},"chart":{"type":"column","inverted":true,"polar":false},"title":{"text":"2017 Disability Equality Index® (DEI®) Best Places to Work"},"subtitle":{"text":"Reference - http://www.usbln.org/wp-content/uploads/2017/08/2017_DEI_Best_Places_to_Work_List-1.pdf"},"exporting":{},"series":[{"data":[["3M",100],["Accenture",100],["Aetna",100],["AMC Theatres",100],["Ameren Corporation",100],["American Airlines",100],["Bank of America",100],["Blue Cross Blue Shield of Michigan",100],["BMO Harris Bank",100],["Booz Allen Hamilton",100],["Boston Scientific Corporation",100],["Brown-Forman Corporation",100],["Capital One",100],["DTE Energy",100],["DuPont",100],["DXC Technology",100],["Express Scripts",100],["EY",100],["Financial Industry Regulatory Authority (FINRA)",100],["Florida Blue",100],["Freddie Mac",100],["General Motors",100],["Goldman Sachs & Co",100],["GSK",100],["Health Care Service Corporation",100],["Hewlett Packard Enterprise",100],["HP Inc.",100],["KPMG  LLP",100],["Lincoln Financial Group",100],["Lockheed Martin Corporation",100],["ManpowerGroup",100],["Mayo Clinic",100],["Microsoft",100],["Northrop Grumman Corporation",100],["Qualcomm  Inc.",100],["Southern Company",100],["Sprint",100],["Starbucks",100],["Synchrony Financial",100],["T-MOBILE USA",100],["TD Bank",100],["The Procter & Gamble Company",100],["United Airlines  Inc.",100],["Verizon",100],["Walgreens",100],["Walmart",100],["Wells Fargo",100],["Oracle Corporation",90],["Raytheon Corporation",90],["Sodexo",90],["Southern California Edison",90],["Spaulding Rehabilitation Network",90],["Thomson Reuters",90],["American Electric Power",80],["Boehringer Ingelheim",80],["W.W. Grainger",80]],"name":"Disability Employment Index","_colorIndex":0,"_symbolIndex":0},{"data":[["3M",null],["Accenture",null],["Aetna",null],["AMC Theatres",null],["Ameren Corporation",null],["American Airlines",null],["Anthem  Inc.",null],["Aramark Corp.",null],["AT&T",null],["BAE Systems  Inc.",null],["Bank of America",null],["Blue Cross Blue Shield of Michigan",null],["BMO Harris Bank",null],["Booz Allen Hamilton",null],["Boston Scientific Corporation",null],["Brown-Forman Corporation",null],["Capital One",null],["Cargill",null],["Cigna",null],["Comcast NBC Universal",null],["CVS Health",null],["Delta Air Lines",null],["DTE Energy",null],["DuPont",null],["DXC Technology",null],["Express Scripts",null],["EY",null],["Financial Industry Regulatory Authority (FINRA)",null],["Florida Blue",null],["Hewlett Packard Enterprise",null],["HP Inc.",null],["Huntington National Bank",null],["Intel Corporation",null],["JPMorgan Chase & Co",null],["Kaiser Permanente",null],["KPMG  LLP",null],["Lincoln Financial Group",null],["Lockheed Martin Corporation",null],["ManpowerGroup",null],["Mayo Clinic",null],["Microsoft",null],["Northrop Grumman Corporation",null],["Pacific Gas and Electric Company",null],["PNC Financial Services Group",null],["Prudential Financial",null],["PwC",null],["Qualcomm  Inc.",null],["Southern Company",null],["Sprint",null],["Starbucks",null],["Synchrony Financial",null],["T-MOBILE USA",null],["TD Bank",null],["The Boeing Company",null],["The Dow Chemical Company",null],["The Hartford Financial Services Group",null],["The Procter & Gamble Company",null],["United Airlines  Inc.",null],["Verizon",null],["Walgreens",null],["Walmart",null],["Wells Fargo",null],["Whirlpool Corporation",null],["AXA",null],["Biogen Inc.",null],["Centene Corporation",null],["Cisco Systems  Inc.",null],["Deloitte",null],["Entergy",null],["M&T Bank",null],["MassMutual Financial Group",null],["Meijer",null],["Merck & Co.  Inc.",null],["MetLife",null],["Nielsen (Corporation)",null],["Northern Trust",null],["Oracle Corporation",null],["Raytheon Corporation",null],["Sodexo",null],["Southern California Edison",null],["Spaulding Rehabilitation Network",null],["Thomson Reuters",null],["American Electric Power",null],["Boehringer Ingelheim",null],["McKesson Corporation",null],["Royal Caribbean Cruises Ltd",null],["Southwest Airlines Co.",null],["United Technologies Corporation",null],["UPS",null],["USAA",null],["W.W. Grainger",null]],"name":"undefined","_colorIndex":1,"_symbolIndex":1}],"plotOptions":{"series":{"animation":false}},"yAxis":[{"title":{}}]};
