@@ -52,24 +52,16 @@ app.get('/', function(req,res){
 // Sidebar - EMPLOYMENT. ReferPage: employment.ejs
 app.get('/employment',function(req,res){
 
-    // Required REST API Headers for the RESTful Call.
-    var headers = {
-        hostname: hostname,
-        path: multiSeriesPath,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
+    ejs.renderFile("./views/employment.ejs",function (err, result) {
+            if (!err) {
+                res.end(result);
+            }
+            else{
+                res.end('An error occurred');
+                console.log(err);
+            }
         }
-    };
-    // Education - With a disability. Pie Chart (0-3), Side-by-side Bar Chart (4-11).
-    var educationData = {
-        'seriesid':["LNU00078210", "LNU00078208", "LNU00078209", "LNU00078207", "LNU02078210", "LNU02078208", "LNU02078209", "LNU02078207", "LNU03078210", "LNU03078208", "LNU03078209", "LNU03078207"],
-        "startyear":"2016",
-        "endyear":"2016",
-        "registrationkey":BLSkey
-    }
-
-    httpRESTRequest(headers, educationData, res, "education");
+    )
 
 });
 
@@ -112,6 +104,19 @@ app.get('/salary', function(req,res){
             }
         }
     )
+});
+
+// Sidebar - JOB. ReferPage: jobprediction.ejs
+app.get('/job', function(req, res) {
+
+    ejs.renderFile("./views/jobprediction.ejs", function(err, result) {
+        if (!err) {
+            res.end(result);
+        } else {
+            res.end('An error occurred');
+            console.log(err);
+        }
+    })
 });
 
 // Express Server port listener.
@@ -200,12 +205,15 @@ app.get('/job', function(req, res) {
 
 }).post('/job', function(req, res) {
 
-        console.log(req.body.profession);
-        console.log(req.body.gender);
+
+    console.log(req.body.profession);
+    console.log(req.body.gender);
+
 
     var spawn = require('child_process').spawn,
         py    = spawn('py', ['ml_model_evaluate.py']),
         data = [req.body.gender,req.body.profession],
+
         dataString = '';
 
     py.stdout.on('data', function(data){
@@ -228,21 +236,23 @@ app.get('/job', function(req, res) {
 
 });
 
+
+
 app.get('/login', function(req,res){
 
-     /*var spawn = require('child_process').spawn,
-        py    = spawn('py', ['ml_model_evaluate.py']),
-        data = [1,3],
-        dataString = '';
+    /*var spawn = require('child_process').spawn,
+       py    = spawn('py', ['ml_model_evaluate.py']),
+       data = [1,3],
+       dataString = '';
+   py.stdout.on('data', function(data){
+     dataString += data.toString();
+   });
+   py.stdout.on('end', function(){
+     console.log('Sum of numbers=',dataString);
+   });
+   py.stdin.write(JSON.stringify(data));
+   py.stdin.end();*/
 
-    py.stdout.on('data', function(data){
-      dataString += data.toString();
-    });
-    py.stdout.on('end', function(){
-      console.log('Sum of numbers=',dataString);
-    });
-    py.stdin.write(JSON.stringify(data));
-    py.stdin.end();*/
 
 
 
