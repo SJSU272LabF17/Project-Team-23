@@ -100,51 +100,32 @@
           <div class="dashboard_graph">
             <div class="row x_title">
               <div class="col-md-6">
-                <h3>Education Level Distribution<small></small></h3>
+                <h3>Employment State Wise Distribution<small></small></h3>
               </div>
             </div>
-            <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
               <div id="chart_plot_01" class="demo-placeholder"></div>
               <script>
-                  // Disabled people education wise highcharts
-                  $(function () {
-                      var chart;
-                      $(document).ready(function() {
-                          chart = new Highcharts.Chart({
-                              chart: {
-                                  renderTo:'chart_plot_01',
-                                  plotBackgroundColor: null,
-                                  plotBorderWidth: null,
-                                  plotShadow: false,
-                                  type: 'pie'
-                              },
-                              title: {
-                                  text: 'Level of Education attained among disabled population'
-                              },
-                              tooltip: {
-                                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                              },
-                              plotOptions: {
-                                  pie: {
-                                      allowPointSelect: true,
-                                      cursor: 'pointer',
-                                      dataLabels: {
-                                          enabled: true,
-                                          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                          style: {
-                                              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                          }
+                  (function(){ function include(script, next) {var sc=document.createElement("script");sc.src = script;sc.type="text/javascript";sc.onload=function() {if (++next < incl.length) include(incl[next], next);};document.head.appendChild(sc);}function each(a, fn){if (typeof a.forEach !== "undefined"){a.forEach(fn);}else{for (var i = 0; i < a.length; i++){if (fn) {fn(a[i]);}}}}var inc = {},incl=[]; each(document.querySelectorAll("script"), function(t) {inc[t.src.substr(0, t.src.indexOf("?"))] = 1;});each(Object.keys({"https://code.highcharts.com/stock/highstock.js":1,"https://code.highcharts.com/adapters/standalone-framework.js":1,"https://code.highcharts.com/highcharts-more.js":1,"https://code.highcharts.com/highcharts-3d.js":1,"https://code.highcharts.com/modules/data.js":1,"https://code.highcharts.com/modules/map.js":1,"https://code.highcharts.com/modules/exporting.js":1,"http://code.highcharts.com/modules/funnel.js":1,"http://code.highcharts.com/modules/solid-gauge.js":1}),function (k){if (!inc[k]) {incl.push(k)}});if (incl.length > 0) { include(incl[0], 0); } function cl() {if(typeof window["Highcharts"] !== "undefined"){var options={"options":{},"title":{"text":"Employment Rate for Workers with Disabilities by State"},"subtitle":{"text":"Source : 2016 Annual Disability Statistics Compendium"},"exporting":{},"yAxis":[{"title":{}}],"series":[{"data":[["Wyoming",57.1],["South Dakota",51.7],["North Dakota",48.8],["Nebraska",48.6],["Minnesota",47.5],["Iowa",46.3],["Utah",45.8],["Kansas",42.8],["Alaska",42.4],["Wisconsin",41.2],["Nevada",41.1],["Vermont",41],["Colorado",40.8],["Montana",40.3],["Idaho",40.2],["Maryland",40],["New Hampshire",39.5],["Texas",38.6],["Illinois",38.3],["New Jersey",37.9],["Oregon",37.8],["Virginia",37.4],["Washington",36.8],["Rhode Island",35.8],["Pennsylvania",35.7],["Connecticut",35.4],["Missouri",35.3],["Ohio",35.2],["Massachusetts",35.1],["Indiana",34.9],["Oklahoma",34.8],["Arizona",34.2],["Delaware",33.9],["California",33.8],["Louisiana",33],["New York",33],["North Carolina",32.2],["Hawaii",31.6],["Florida",31.4],["Georgia",31.1],["Michigan",30.9],["New Mexico",30.8],["Arkansas",30.7],["Tennessee",30.4],["Maine",29.6],["South Carolina",28.7],["Alabama",27.9],["Mississippi",27.5],["Kentucky",27.4],["West Virginia",25.4]],"name":"Employment Rate","_colorIndex":0,"_symbolIndex":0}],"plotOptions":{"series":{"animation":false}}};
+                      // Sample of extending options:
+                      Highcharts.merge(true, options, {
+                          chart: {
+                          },
+                          plotOptions: {
+                              series: {
+                                  cursor: "pointer",
+                                  events: {
+                                      click: function(event) {
+                                          alert(this.name + " clicked\n" +
+                                              "Alt: " + event.altKey + "\n" +
+                                              "Control: " + event.ctrlKey + "\n" +
+                                              "Shift: " + event.shiftKey + "\n");
                                       }
                                   }
-                              },
-                              series: [{
-                                  name: 'Education',
-                                  colorByPoint:true,
-                                  data:[['Bachelor\'s degree',<%= data[8].data[0].value%>], ['High school graduates',<%= data[6].data[0].value%>],['Some college or associate degree',<%= data[4].data[0].value%>],['Less than a high school diploma',<%= data[0].data[0].value%>]]
-                              }]
-                          });
+                              }
+                          }
                       });
-                  });
+                      new Highcharts.Chart("chart_plot_01", options);}else window.setTimeout(cl, 20);}cl();})();
               </script>
             </div>
             <div class="clearfix"></div>
@@ -170,55 +151,33 @@
                 <div class="dashboard_graph">
                   <div class="row x_title">
                     <div class="col-md-6">
-                      <h3>Employment Status w.r.t Education Level<small></small></h3>
+                      <h3>Disability Equality Index<small></small></h3>
                     </div>
                   </div>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                     <div id="chart_plot_02" class="demo-placeholder"></div>
                     <script>
-                        // Education Highcharts
-                        $(function () {
-                            var chart;
-                            $(document).ready(function() {
-                                // $.getJSON("data.php", function(json) {
-
-                                chart = new Highcharts.Chart({
-                                    chart: {
-                                        renderTo:'chart_plot_02',
-                                        plotBackgroundColor: null,
-                                        plotBorderWidth: null,
-                                        plotShadow: false,
-                                        type: 'column'
-                                    },
-                                    title: {
-                                        text: 'Employment status with attained education level'
-                                    },
-                                    xAxis: {
-                                        categories: ['Bachelor\'s degree', 'High school graduates', 'Some college or associate degree', 'Less than a high school diploma']
-                                    },
-                                    yAxis: {
-                                        min: 0,
-                                        title: {
-                                            text: 'Number in thousands'
+                        (function(){ function include(script, next) {var sc=document.createElement("script");sc.src = script;sc.type="text/javascript";sc.onload=function() {if (++next < incl.length) include(incl[next], next);};document.head.appendChild(sc);}function each(a, fn){if (typeof a.forEach !== "undefined"){a.forEach(fn);}else{for (var i = 0; i < a.length; i++){if (fn) {fn(a[i]);}}}}var inc = {},incl=[]; each(document.querySelectorAll("script"), function(t) {inc[t.src.substr(0, t.src.indexOf("?"))] = 1;});each(Object.keys({"https://code.highcharts.com/stock/highstock.js":1,"https://code.highcharts.com/adapters/standalone-framework.js":1,"https://code.highcharts.com/highcharts-more.js":1,"https://code.highcharts.com/highcharts-3d.js":1,"https://code.highcharts.com/modules/data.js":1,"https://code.highcharts.com/modules/map.js":1,"https://code.highcharts.com/modules/exporting.js":1,"http://code.highcharts.com/modules/funnel.js":1,"http://code.highcharts.com/modules/solid-gauge.js":1}),function (k){if (!inc[k]) {incl.push(k)}});if (incl.length > 0) { include(incl[0], 0); } function cl() {if(typeof window["Highcharts"] !== "undefined"){var options={"options":{},"chart":{"type":"column","inverted":true,"polar":false},"title":{"text":"2017 Disability Equality Index® (DEI®) Best Places to Work"},"subtitle":{"text":"Reference - http://www.usbln.org/wp-content/uploads/2017/08/2017_DEI_Best_Places_to_Work_List-1.pdf"},"exporting":{},"series":[{"data":[["3M",100],["Accenture",100],["Aetna",100],["AMC Theatres",100],["Ameren Corporation",100],["American Airlines",100],["Bank of America",100],["Blue Cross Blue Shield of Michigan",100],["BMO Harris Bank",100],["Booz Allen Hamilton",100],["Boston Scientific Corporation",100],["Brown-Forman Corporation",100],["Capital One",100],["DTE Energy",100],["DuPont",100],["DXC Technology",100],["Express Scripts",100],["EY",100],["Financial Industry Regulatory Authority (FINRA)",100],["Florida Blue",100],["Freddie Mac",100],["General Motors",100],["Goldman Sachs & Co",100],["GSK",100],["Health Care Service Corporation",100],["Hewlett Packard Enterprise",100],["HP Inc.",100],["KPMG  LLP",100],["Lincoln Financial Group",100],["Lockheed Martin Corporation",100],["ManpowerGroup",100],["Mayo Clinic",100],["Microsoft",100],["Northrop Grumman Corporation",100],["Qualcomm  Inc.",100],["Southern Company",100],["Sprint",100],["Starbucks",100],["Synchrony Financial",100],["T-MOBILE USA",100],["TD Bank",100],["The Procter & Gamble Company",100],["United Airlines  Inc.",100],["Verizon",100],["Walgreens",100],["Walmart",100],["Wells Fargo",100],["Oracle Corporation",90],["Raytheon Corporation",90],["Sodexo",90],["Southern California Edison",90],["Spaulding Rehabilitation Network",90],["Thomson Reuters",90],["American Electric Power",80],["Boehringer Ingelheim",80],["W.W. Grainger",80]],"name":"Disability Employment Index","_colorIndex":0,"_symbolIndex":0},{"data":[["3M",null],["Accenture",null],["Aetna",null],["AMC Theatres",null],["Ameren Corporation",null],["American Airlines",null],["Anthem  Inc.",null],["Aramark Corp.",null],["AT&T",null],["BAE Systems  Inc.",null],["Bank of America",null],["Blue Cross Blue Shield of Michigan",null],["BMO Harris Bank",null],["Booz Allen Hamilton",null],["Boston Scientific Corporation",null],["Brown-Forman Corporation",null],["Capital One",null],["Cargill",null],["Cigna",null],["Comcast NBC Universal",null],["CVS Health",null],["Delta Air Lines",null],["DTE Energy",null],["DuPont",null],["DXC Technology",null],["Express Scripts",null],["EY",null],["Financial Industry Regulatory Authority (FINRA)",null],["Florida Blue",null],["Hewlett Packard Enterprise",null],["HP Inc.",null],["Huntington National Bank",null],["Intel Corporation",null],["JPMorgan Chase & Co",null],["Kaiser Permanente",null],["KPMG  LLP",null],["Lincoln Financial Group",null],["Lockheed Martin Corporation",null],["ManpowerGroup",null],["Mayo Clinic",null],["Microsoft",null],["Northrop Grumman Corporation",null],["Pacific Gas and Electric Company",null],["PNC Financial Services Group",null],["Prudential Financial",null],["PwC",null],["Qualcomm  Inc.",null],["Southern Company",null],["Sprint",null],["Starbucks",null],["Synchrony Financial",null],["T-MOBILE USA",null],["TD Bank",null],["The Boeing Company",null],["The Dow Chemical Company",null],["The Hartford Financial Services Group",null],["The Procter & Gamble Company",null],["United Airlines  Inc.",null],["Verizon",null],["Walgreens",null],["Walmart",null],["Wells Fargo",null],["Whirlpool Corporation",null],["AXA",null],["Biogen Inc.",null],["Centene Corporation",null],["Cisco Systems  Inc.",null],["Deloitte",null],["Entergy",null],["M&T Bank",null],["MassMutual Financial Group",null],["Meijer",null],["Merck & Co.  Inc.",null],["MetLife",null],["Nielsen (Corporation)",null],["Northern Trust",null],["Oracle Corporation",null],["Raytheon Corporation",null],["Sodexo",null],["Southern California Edison",null],["Spaulding Rehabilitation Network",null],["Thomson Reuters",null],["American Electric Power",null],["Boehringer Ingelheim",null],["McKesson Corporation",null],["Royal Caribbean Cruises Ltd",null],["Southwest Airlines Co.",null],["United Technologies Corporation",null],["UPS",null],["USAA",null],["W.W. Grainger",null]],"name":"undefined","_colorIndex":1,"_symbolIndex":1}],"plotOptions":{"series":{"animation":false}},"yAxis":[{"title":{}}]};
+                            // Sample of extending options:
+                            Highcharts.merge(true, options, {
+                                chart: {
+                                    type: "column"
+                                },
+                                plotOptions: {
+                                    series: {
+                                        cursor: "pointer",
+                                        events: {
+                                            click: function(event) {
+                                                alert(this.name + " clicked\n" +
+                                                    "Alt: " + event.altKey + "\n" +
+                                                    "Control: " + event.ctrlKey + "\n" +
+                                                    "Shift: " + event.shiftKey + "\n");
+                                            }
                                         }
-                                    },
-                                    plotOptions: {
-                                        column: {
-                                            pointPadding: 0.2,
-                                            borderWidth: 0
-                                        }
-                                    },
-                                    series: [{
-                                        name: 'Employed',
-                                        data: [<%= data[10].data[0].value%>, <%= data[5].data[0].value%>, <%= data[7].data[0].value%>,<%= data[3].data[0].value%>]
-                                    }, {
-                                        name: 'Unemployed',
-                                        data: [<%= data[9].data[0].value%>, <%= data[2].data[0].value%>, <%= data[11].data[0].value%>,<%= data[1].data[0].value%>]
-                                    }],
-                                });
-                                //  });
+                                    }
+                                }
                             });
-                        });
+                            new Highcharts.Chart("chart_plot_02", options);}else window.setTimeout(cl, 20);}cl();})();
                     </script>
                   </div>
                   <div class="clearfix"></div>
