@@ -23,6 +23,7 @@ def get_feature_vector(gender, profession):
 def main():
     #get our data as an array from read_in()
     lines = read_in()
+    intercept = 7.3175595238095212
 
     #create a numpy array
     line = np.array(lines)
@@ -33,7 +34,7 @@ def main():
     profession = int(line[1])
     #print(profession)
     feature_vector = get_feature_vector(gender, profession)
-    score = 0
+    score = intercept
     #print(coefficients[0])
     #return
     for i, f in enumerate(feature_vector):

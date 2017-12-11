@@ -34,17 +34,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ml_model_evaluate.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ml_model_evaluate.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ml_model_evaluate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="24" column="2" lean-forward="true" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+            <state relative-caret-position="200">
+              <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jobprediction.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="jobprediction.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/jobprediction.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
@@ -165,7 +165,6 @@
         <option value="$PROJECT_DIR$/routes/google2.js" />
         <option value="$PROJECT_DIR$/views/login.ejs" />
         <option value="$PROJECT_DIR$/views/temp.html" />
-        <option value="$PROJECT_DIR$/ml_model_evaluate.py" />
         <option value="$PROJECT_DIR$/views/education.ejs" />
         <option value="$PROJECT_DIR$/views/employment.ejs" />
         <option value="$PROJECT_DIR$/views/gender.ejs" />
@@ -173,6 +172,7 @@
         <option value="$PROJECT_DIR$/views/welcome.ejs" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/views/jobprediction.ejs" />
+        <option value="$PROJECT_DIR$/ml_model_evaluate.py" />
       </list>
     </option>
   </component>
@@ -274,7 +274,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61653000" />
+    <option name="totallyTimeSpent" value="62541000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1054" extended-state="6" />
@@ -628,14 +628,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/temp.html" />
-    <entry file="file://$PROJECT_DIR$/ml_model_evaluate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="24" column="2" lean-forward="true" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
@@ -706,6 +698,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="54" column="26" lean-forward="false" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ml_model_evaluate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
           <folding />
         </state>
       </provider>
