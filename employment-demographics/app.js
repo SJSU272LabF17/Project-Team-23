@@ -171,7 +171,7 @@ app.get('/job', function(req, res) {
 
 
     var spawn = require('child_process').spawn,
-        py    = spawn('py', ['ml_model_evaluate.py']),
+        py    = spawn('python', ['ml_model_evaluate.py']),
         data = [0,1],
         dataString = '';
 
@@ -200,7 +200,7 @@ app.get('/job', function(req, res) {
 
 
     var spawn = require('child_process').spawn,
-        py    = spawn('py', ['ml_model_evaluate.py']),
+        py    = spawn('python', ['ml_model_evaluate.py']),
         data = [req.body.gender,req.body.profession],
 
         dataString = '';
